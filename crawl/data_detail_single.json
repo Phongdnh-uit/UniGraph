@@ -1,0 +1,848 @@
+{
+    "url": "https://student.uit.edu.vn/content/cu-nhan-nganh-ky-thuat-phan-mem-ap-dung-tu-khoa-20-2025",
+    "title": "Cử nhân ngành Kỹ thuật Phần mềm (Áp dụng từ khóa 20 - 2025)",
+    "curriculum": [
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS003",
+            "ten_mh": "Tư tưởng Hồ Chí Minh",
+            "tc": "2"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS007",
+            "ten_mh": "Triết học Mác – Lênin",
+            "tc": "3"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS008",
+            "ten_mh": "Kinh tế chính trị Mác – Lênin",
+            "tc": "2"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS009",
+            "ten_mh": "Chủ nghĩa xã hội khoa học",
+            "tc": "2"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS010",
+            "ten_mh": "Lịch sử Đảng Cộng sản Việt Nam",
+            "tc": "2"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "SS006",
+            "ten_mh": "Pháp luật đại cương",
+            "tc": "2"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "MA006",
+            "ten_mh": "Giải tích",
+            "tc": "4"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "MA003",
+            "ten_mh": "Đại số tuyến tính",
+            "tc": "3"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "MA004",
+            "ten_mh": "Cấu trúc rời rạc",
+            "tc": "4"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "MA005",
+            "ten_mh": "Xác suất thống kê",
+            "tc": "3"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "IT001",
+            "ten_mh": "Nhập môn Lập trình",
+            "tc": "3"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "ENG01",
+            "ten_mh": "Anh văn 1",
+            "tc": "4"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "ENG02",
+            "ten_mh": "Anh văn 2",
+            "tc": "4"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "ENG03",
+            "ten_mh": "Anh văn 3",
+            "tc": "4"
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "ME001",
+            "ten_mh": "Giáo dục Quốc phòng",
+            "tc": ""
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "PE231",
+            "ten_mh": "Giáo dục thể chất 1",
+            "tc": ""
+        },
+        {
+            "h2": "3.3 Khối kiến thức giáo dục đại cương",
+            "h3": "",
+            "h4": "Tổng cộng 43 tín chỉ (không kể kiến thức về giáo dục thể chất và giáo dục quốc phòng)",
+            "ma_mh": "PE232",
+            "ten_mh": "Giáo dục thể chất 2",
+            "tc": ""
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE005",
+            "ten_mh": "Giới thiệu ngành Kỹ thuật Phần mềm",
+            "tc": "1"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT002",
+            "ten_mh": "Lập trình hướng đối tượng",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT003",
+            "ten_mh": "Cấu trúc dữ liệu và giải thuật",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT004",
+            "ten_mh": "Cơ sở dữ liệu",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT005",
+            "ten_mh": "Nhập môn mạng máy tính",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT007",
+            "ten_mh": "Hệ điều hành",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT012",
+            "ten_mh": "Tổ chức và cấu trúc máy tính II",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "IT008",
+            "ten_mh": "Lập trình trực quan",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE100",
+            "ten_mh": "Phương pháp phát triển phần mềm hướng đối tượng",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE104",
+            "ten_mh": "Nhập môn công nghệ phần mềm",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE359",
+            "ten_mh": "DevOps trong Phát triển Phần mềm",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE102",
+            "ten_mh": "Nhập môn phát triển game (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE115",
+            "ten_mh": "Phát triển game với Unity",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE116",
+            "ten_mh": "Phát triển kỹ năng lập trình Game ứng dụng trong thực tế",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE114",
+            "ten_mh": "Nhập môn ứng dụng di động (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE360",
+            "ten_mh": "Điện toán đám mây và phát triển ứng dụng hướng dịch vụ",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE361",
+            "ten_mh": "Phát triển phần mềm theo kiến trúc Microservices",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE301",
+            "ten_mh": "Phát triển phần mềm mã nguồn mở (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE215",
+            "ten_mh": "Giao tiếp người máy (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE113",
+            "ten_mh": "Kiểm chứng phần mềm (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE358",
+            "ten_mh": "Quản lý dự án phát triển phần mềm (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.1 Nhóm các môn học cơ sở ngành",
+            "h4": "Tổng cộng 49 tín chỉ.",
+            "ma_mh": "SE117",
+            "ten_mh": "Kỹ thuật lập trình",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE330",
+            "ten_mh": "Ngôn ngữ lập trình Java (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE332",
+            "ten_mh": "Chuyên đề CSDL nâng cao (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE334",
+            "ten_mh": "Các phương pháp lập trình (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE347",
+            "ten_mh": "Công nghệ Web và ứng dụng (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE350",
+            "ten_mh": "Chuyên đề E-learning (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE343",
+            "ten_mh": "Công nghệ Portal (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE355",
+            "ten_mh": "Máy học và các công cụ (2)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE310",
+            "ten_mh": "Công nghệ .NET (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE346",
+            "ten_mh": "Lập trình trên thiết bị di động (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE404",
+            "ten_mh": "Chuyên đề E-Government (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE331",
+            "ten_mh": "Chuyên đề E-Commerce (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE313",
+            "ten_mh": "Một số thuật toán thông minh (2)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE352",
+            "ten_mh": "Phát triển ứng dụng VR (1)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE109",
+            "ten_mh": "Phát triển, vận hành, bảo trì phần mềm (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE356",
+            "ten_mh": "Kiến trúc phần mềm (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE357",
+            "ten_mh": "Kỹ thuật phân tích yêu cầu (2)",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE325",
+            "ten_mh": "Chuyên đề J2EE (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE101",
+            "ten_mh": "Phương pháp mô hình hóa",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE106",
+            "ten_mh": "Đặc tả hình thức",
+            "tc": "4"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE214",
+            "ten_mh": "Công nghệ phần mềm chuyên sâu",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE362",
+            "ten_mh": "An toàn phần mềm và hệ thống",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE363",
+            "ten_mh": "Phát triển ứng dụng trên nền tảng dữ liệu lớn",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE364",
+            "ten_mh": "Thiết kế giao diện và trải nghiệm người dùng",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE365",
+            "ten_mh": "Học sâu ứng dụng trong phát triển phần mềm",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE221",
+            "ten_mh": "Lập trình game nâng cao (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE220",
+            "ten_mh": "Thiết kế game (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE320",
+            "ten_mh": "Lập trình đồ họa 3 chiều với Direct 3D (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE327",
+            "ten_mh": "Phát triển và vận hành game (1)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE328",
+            "ten_mh": "Lập trình TTNT trong game (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE344",
+            "ten_mh": "Lập trình game trên các thiết bị di động (2)",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE314",
+            "ten_mh": "Công nghệ game 3D",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE315",
+            "ten_mh": "Công nghệ Game Online",
+            "tc": "3"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE316",
+            "ten_mh": "Phát triển Game đa nền tảng",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.2 Nhóm các môn học tự chọn chuyên ngành: 16TC",
+            "h4": "12",
+            "ma_mh": "SE317",
+            "ten_mh": "Công nghệ tiên tiến trong phát triển game",
+            "tc": "2"
+        },
+        {
+            "h2": "3.4 Khối kiến thức giáo dục chuyên nghiệp",
+            "h3": "3.4.3 Nhóm các môn học khác",
+            "h4": "TH",
+            "ma_mh": "SS004",
+            "ten_mh": "Kỹ năng nghề nghiệp",
+            "tc": "2"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.1 Thực tập",
+            "h4": "Lưu ý: Sinh viên có thể chọn các môn học thuộc khối kiến thức giáo dục chuyên nghiệp trong các chương trình đào tạo đại học hoặc sau đại học của Trường ĐHCNTT hoặc của các Trường đại học khác trong ĐHQG –HCM hoặc của các Trường đại học khác ngoài ĐHQG –HCM mà có ký kết hợp tác với Trường ĐHCNTT hoặc môn Thực tập Quốc tế (mã môn INI01, 2TC) để tích lũy 06 tín chỉ tự chọn tự do (*). Các môn học tương đương nhau chỉ được tính một lần vào tổng số tín chỉ tích lũy.",
+            "ma_mh": "SE502",
+            "ten_mh": "Thực tập",
+            "tc": "2"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.2 Nhóm các môn học đồ án",
+            "h4": "TH",
+            "ma_mh": "SE503",
+            "ten_mh": "Đồ án",
+            "tc": "2"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.3 Khóa luận tốt nghiệp",
+            "h4": "Sinh viên đủ điều kiện thực hiện Khóa luận tốt nghiệp theo quy chế của Trường có thể đăng ký làm khóa luận tốt nghiệp với số tín chỉ là 10 (tối đa 02 sinh viên/ đề tài). Sinh viên không đủ điều kiện hoặc đủ điều kiện nhưng không đăng ký thực hiện Khóa luận tốt nghiệp thì có thể đăng ký thực hiện môn Đồ án tốt nghiệp tại doanh nghiệp (10TC) hoặc hình thức kết hợp giữa Đồ án tốt nghiệp (6 TC) và tối thiểu 01 môn trong các môn chuyên đề tốt nghiệp.",
+            "ma_mh": "SE505",
+            "ten_mh": "Khóa luận tốt nghiệp",
+            "tc": "10"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.4 Đồ án tốt nghiệp tại doanh nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE506",
+            "ten_mh": "Đồ án tốt nghiệp tại doanh nghiệp",
+            "tc": "10"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE507",
+            "ten_mh": "Đồ án tốt nghiệp",
+            "tc": "6"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE400",
+            "ten_mh": "Seminar các vấn đề hiện đại của Công nghệ Phần mềm",
+            "tc": "4"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE406",
+            "ten_mh": "Mẫu thiết kế hướng đối tượng",
+            "tc": "4"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE403",
+            "ten_mh": "Nguyên lý thiết kế thế giới ảo",
+            "tc": "4"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE407",
+            "ten_mh": "Chuyên đề Pervasive and Mobile Computing",
+            "tc": "4"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE408",
+            "ten_mh": "Phát triển game với Blockchain",
+            "tc": "3"
+        },
+        {
+            "h2": "3.5 Khối kiến thức tốt nghiệp",
+            "h3": "3.5.5 Nhóm gồm Đồ án tốt nghiệp và các môn học chuyên đề tốt nghiệp",
+            "h4": "TH",
+            "ma_mh": "SE409",
+            "ten_mh": "Phát triển dự án Game",
+            "tc": "3"
+        }
+    ],
+    "teaching_plan": [
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "MA006",
+            "ten_mh": "Giải tích"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "MA003",
+            "ten_mh": "Đại số tuyến tính"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "ENG01",
+            "ten_mh": "Anh văn 1"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "SE005",
+            "ten_mh": "Giới thiệu ngành Kỹ thuật Phần mềm"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "IT001",
+            "ten_mh": "Nhập môn lập trình"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "IT007",
+            "ten_mh": "Hệ điều hành"
+        },
+        {
+            "hoc_ky": "Học kỳ 1",
+            "ma_mh": "ME001",
+            "ten_mh": "Giáo dục quốc phòng"
+        },
+        {
+            "hoc_ky": "Học kỳ 2",
+            "ma_mh": "IT002",
+            "ten_mh": "Lập trình hướng đối tượng"
+        },
+        {
+            "hoc_ky": "Học kỳ 2",
+            "ma_mh": "IT003",
+            "ten_mh": "Cấu trúc dữ liệu và giải thuật"
+        },
+        {
+            "hoc_ky": "Học kỳ 2",
+            "ma_mh": "MA004",
+            "ten_mh": "Cấu trúc rời rạc"
+        },
+        {
+            "hoc_ky": "Học kỳ 2",
+            "ma_mh": "MA005",
+            "ten_mh": "Xác suất thống kê"
+        },
+        {
+            "hoc_ky": "Học kỳ 2",
+            "ma_mh": "ENG02",
+            "ten_mh": "Anh văn 2"
+        },
+        {
+            "hoc_ky": "Học kỳ 3",
+            "ma_mh": "IT004",
+            "ten_mh": "Cơ sở dữ liệu"
+        },
+        {
+            "hoc_ky": "Học kỳ 3",
+            "ma_mh": "IT005",
+            "ten_mh": "Nhập môn mạng máy tính"
+        },
+        {
+            "hoc_ky": "Học kỳ 3",
+            "ma_mh": "IT012",
+            "ten_mh": "Tổ chức và cấu trúc máy tính 2"
+        },
+        {
+            "hoc_ky": "Học kỳ 3",
+            "ma_mh": "IT008",
+            "ten_mh": "Lập trình trực quan"
+        },
+        {
+            "hoc_ky": "Học kỳ 3",
+            "ma_mh": "ENG03",
+            "ten_mh": "Anh văn 3"
+        },
+        {
+            "hoc_ky": "Học kỳ 4",
+            "ma_mh": "SE104",
+            "ten_mh": "Nhập môn công nghệ phần mềm"
+        },
+        {
+            "hoc_ky": "Học kỳ 4",
+            "ma_mh": "SS007",
+            "ten_mh": "Triết học Mác - Lênin"
+        },
+        {
+            "hoc_ky": "Học kỳ 4",
+            "ma_mh": "SS008",
+            "ten_mh": "Kinh tế chính trị Mác – Lênin"
+        },
+        {
+            "hoc_ky": "Học kỳ 4",
+            "ma_mh": "SS004",
+            "ten_mh": "Kỹ năng nghề nghiệp"
+        },
+        {
+            "hoc_ky": "Học kỳ 5",
+            "ma_mh": "SS009",
+            "ten_mh": "Chủ nghĩa xã hội khoa học"
+        },
+        {
+            "hoc_ky": "Học kỳ 5",
+            "ma_mh": "SS010",
+            "ten_mh": "Lịch sử Đảng Cộng sản Việt Nam"
+        },
+        {
+            "hoc_ky": "Học kỳ 5",
+            "ma_mh": "SE100",
+            "ten_mh": "Phương pháp phát triển phần mềm hướng đối tượng"
+        },
+        {
+            "hoc_ky": "Học kỳ 5",
+            "ma_mh": "PE231",
+            "ten_mh": "Giáo dục thể chất 1"
+        },
+        {
+            "hoc_ky": "Học kỳ 6",
+            "ma_mh": "SS006",
+            "ten_mh": "Pháp luật đại cương"
+        },
+        {
+            "hoc_ky": "Học kỳ 6",
+            "ma_mh": "SS003",
+            "ten_mh": "Tư tưởng Hồ Chí Minh"
+        },
+        {
+            "hoc_ky": "Học kỳ 6",
+            "ma_mh": "SE503",
+            "ten_mh": "Đồ án"
+        },
+        {
+            "hoc_ky": "Học kỳ 6",
+            "ma_mh": "PE232",
+            "ten_mh": "Giáo dục thể chất 2"
+        },
+        {
+            "hoc_ky": "Học kỳ 7",
+            "ma_mh": "SE502",
+            "ten_mh": "Thực tập"
+        },
+        {
+            "hoc_ky": "Học kỳ 8",
+            "ma_mh": "SE505",
+            "ten_mh": "Khóa luận tốt nghiệp"
+        },
+        {
+            "hoc_ky": "Học kỳ 8",
+            "ma_mh": "SE506",
+            "ten_mh": "Đồ án tốt nghiệp tại doanh nghiệp"
+        }
+    ]
+}
