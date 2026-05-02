@@ -88,7 +88,7 @@ def crawl_from_web(url):
         table = soup.find('table', class_='tablesorter')
         
         if not table:
-            print("Không tìm thấy bảng dữ liệu trên trang này!")
+            print("Không tìm thấy bảng dữ liệu!")
             return None
 
         results = []
@@ -98,24 +98,35 @@ def crawl_from_web(url):
             cols = row.find_all('td')
             if len(cols) < 10: continue 
 
-            # Xử lý trạng thái "Còn mở lớp" (Cột 5) - Trả về Boolean hoặc String chuẩn
-            is_open = "Active" if cols[4].find('img') else "Closed"
+            # HÀM XỬ LÝ ĐẶC BIỆT CHO THẺ BR
+            def get_ai_friendly_text(cell):
+                # Tạo một bản sao để không làm hỏng cấu trúc gốc khi vòng lặp chạy
+                # Thay thế tất cả thẻ <br/> bằng một dấu xuống dòng thực thụ
+                for br in cell.find_all("br"):
+                    br.replace_with("\n")
+                
+                # Lấy text và xử lý khoảng trắng thừa
+                # AI hiểu dấu xuống dòng (\n) trong ô cực tốt
+                lines = [line.strip() for line in cell.get_text().splitlines() if line.strip()]
+                return "\n".join(lines)
 
-            # ĐẶT LẠI HEADER THÂN THIỆN VỚI AI TẠI ĐÂY
+            is_open = "Open" if cols[4].find('img') else "Closed"
+
+            # Header tối ưu cho AI (No dấu, snake_case)
             item = {
-                "id": cols[0].text.strip(),
-                "course_code": cols[1].text.strip(),
-                "course_name_vi": cols[2].text.strip(),
-                "course_name_en": cols[3].text.strip(),
+                "id": get_ai_friendly_text(cols[0]),
+                "course_code": get_ai_friendly_text(cols[1]),
+                "course_name_vi": get_ai_friendly_text(cols[2]),
+                "course_name_en": get_ai_friendly_text(cols[3]),
                 "status": is_open,
-                "department": cols[5].text.strip(),
-                "course_type": cols[6].text.strip(),
-                "old_course_code": cols[7].text.strip(),
-                "equivalent_course_code": cols[8].text.strip(),
-                "prerequisite_course_code": cols[9].text.strip(),
-                "previous_course_code": cols[10].text.strip(),
-                "theory_credits": cols[11].text.strip(),
-                "practical_credits": cols[12].text.strip(),
+                "department": get_ai_friendly_text(cols[5]),
+                "course_category": get_ai_friendly_text(cols[6]),
+                "old_course_code": get_ai_friendly_text(cols[7]),
+                "equivalent_course_codes": get_ai_friendly_text(cols[8]),
+                "prerequisite_course_codes": get_ai_friendly_text(cols[9]),
+                "previous_course_codes": get_ai_friendly_text(cols[10]),
+                "theory_credits": get_ai_friendly_text(cols[11]),
+                "practical_credits": get_ai_friendly_text(cols[12]),
             }
             results.append(item)
 
@@ -130,6 +141,6 @@ data = crawl_from_web(URL)
 
 if data:
     df = pd.DataFrame(data)
-    # Xuất file với tiêu đề đã chuẩn hóa
+    # Xuất file
     df.to_csv('subjects.csv', index=False, encoding='utf-8-sig')
-    print(f"Thành công! Đã lấy được {len(df)} môn học.")
+    print(f"Thành công! Đã tách được dòng trong ô cho {len(df)} môn học.")

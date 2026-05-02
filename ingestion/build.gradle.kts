@@ -31,6 +31,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
+    implementation("com.opencsv:opencsv:5.9")
 	// implementation("org.springframework.ai:spring-ai-jsoup-document-reader")
 	// implementation("org.springframework.ai:spring-ai-starter-vector-store-neo4j")
     implementation ("eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:$neo4jMigrationsVersion")
