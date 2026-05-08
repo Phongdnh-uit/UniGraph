@@ -1,5 +1,8 @@
 package com.uni_graph.ingestion.controllers;
 
+import com.uni_graph.ingestion.dto.ApiResponse;
+import com.uni_graph.ingestion.enums.ErrorCode;
+import com.uni_graph.ingestion.exception.AppException;
 import com.uni_graph.ingestion.service.CsvIngestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @Tag(
-    name = "Ingrestion Controller",
-    description = "Controller for handling ingrestion related operations")
-@RequestMapping("/api/v1/ingrestion")
+    name = "Ingestion Controller",
+    description = "Controller for handling ingestion related operations")
+@RequestMapping("/api/v1/ingestion")
 @RestController
 @RequiredArgsConstructor
-public class IngrestionController {
+public class IngestionController {
 
   private final CsvIngestionService csvIngestionService;
 
@@ -43,30 +46,27 @@ public class IngrestionController {
               + "12. theory_credits (Integer)\n"
               + "13. practical_credits (Integer)")
   @PostMapping(value = "/ingest-by-csv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<String> ingestData(
+  public ResponseEntity<ApiResponse<String>> ingestData(
       @Parameter(
               description = "CSV file to upload",
               content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
           @RequestParam("file")
-          MultipartFile file) {
+          MultipartFile file)
+      throws IOException {
 
     if (file.isEmpty()) {
-      return ResponseEntity.badRequest().body("Please upload a CSV file.");
+      throw new AppException(ErrorCode.CSV_VALIDATION_FAILED, "Please upload a CSV file.");
     }
 
-    try {
-      csvIngestionService.ingestCoursesFromCsv(file.getInputStream());
-      return ResponseEntity.ok("Data ingested successfully!");
-    } catch (IOException e) {
-      return ResponseEntity.internalServerError()
-          .body("Error reading uploaded file: " + e.getMessage());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().body("Ingestion failed: " + e.getMessage());
-    }
+    csvIngestionService.ingestCoursesFromCsv(file.getInputStream());
+
+    return ResponseEntity.ok(
+        ApiResponse.<String>builder().message("Data ingested successfully!").build());
   }
 
-  @PostMapping("/ingrest-by-crawler")
-  public ResponseEntity<String> ingestByCrawler() {
-    return ResponseEntity.ok("Data ingested successfully by crawler!");
+  @PostMapping("/ingest-by-crawler")
+  public ResponseEntity<ApiResponse<String>> ingestByCrawler() {
+    return ResponseEntity.ok(
+        ApiResponse.<String>builder().message("Data ingested successfully by crawler!").build());
   }
 }

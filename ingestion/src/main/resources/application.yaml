@@ -1,5 +1,5 @@
 spring:
   application:
-    name: ingrestion
+    name: ingestion
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:local}
+    active: local

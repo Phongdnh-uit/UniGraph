@@ -5,5 +5,4 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RequirementRuleRepository extends Neo4jRepository<RequirementRule, Long> {
-}
+public interface RequirementRuleRepository extends Neo4jRepository<RequirementRule, Long> {}

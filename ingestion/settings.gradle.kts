@@ -1,1 +1,1 @@
-rootProject.name = "ingrestion"
+rootProject.name = "ingestion"

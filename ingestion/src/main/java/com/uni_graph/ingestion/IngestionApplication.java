@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IngrestionApplication {
+public class IngestionApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(IngrestionApplication.class, args);
+    SpringApplication.run(IngestionApplication.class, args);
   }
 }

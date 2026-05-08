@@ -37,15 +37,15 @@ def crawl_summaries():
             tom_tat = cols[3].get_text(strip=True)
 
             summary_data.append({
-                "MaMH": ma_mh,
-                "TenMH": ten_mh,
-                "TomTat": tom_tat
+                "course_code": ma_mh,
+                "course_name_vi": ten_mh,
+                "course_summary": tom_tat
             })
 
         df = pd.DataFrame(summary_data)
 
         # Lưu ra file CSV riêng
-        df.to_csv('tom_tat_mon_hoc.csv', index=False, encoding='utf-8-sig')
+        df.to_csv('subject_summary.csv', index=False, encoding='utf-8-sig')
         print(f"Thành công! Đã lấy được {len(df)} dòng tóm tắt.")
         return df
 

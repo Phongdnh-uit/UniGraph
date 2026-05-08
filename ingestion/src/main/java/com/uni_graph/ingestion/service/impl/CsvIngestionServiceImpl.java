@@ -4,8 +4,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import com.uni_graph.ingestion.domain.*;
+import com.uni_graph.ingestion.enums.ErrorCode;
 import com.uni_graph.ingestion.enums.LogicType;
 import com.uni_graph.ingestion.enums.RuleType;
+import com.uni_graph.ingestion.exception.AppException;
 import com.uni_graph.ingestion.repository.*;
 import com.uni_graph.ingestion.service.CsvIngestionService;
 import java.io.*;
@@ -33,20 +35,16 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
     log.info("Starting ingestion from CSV stream");
     Path tempFile = null;
     try {
-      // Save InputStream to temp file for two-pass reading
       tempFile = Files.createTempFile("ingestion-", ".csv");
       Files.copy(inputStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
-      // Pass 1: Create all Course and Department nodes
       createBaseNodes(tempFile.toFile());
-
-      // Pass 2: Establish relationships
       linkRelationships(tempFile.toFile());
 
       log.info("Ingestion completed successfully.");
-    } catch (IOException e) {
-      log.error("Failed to process CSV stream", e);
-      throw new RuntimeException("CSV processing failed", e);
+    } catch (IOException | CsvValidationException e) {
+      log.error("Error during CSV ingestion", e);
+      throw new AppException(ErrorCode.INGESTION_FAILED, e.getMessage());
     } finally {
       if (tempFile != null) {
         try {
@@ -58,7 +56,7 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
     }
   }
 
-  private void createBaseNodes(File file) {
+  private void createBaseNodes(File file) throws IOException, CsvValidationException {
     log.info("Pass 1: Creating base nodes");
     Map<String, Department> departmentCache = new HashMap<>();
     try (CSVReader reader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).build()) {
@@ -101,13 +99,10 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         course.setDepartment(department);
         courseRepository.save(course);
       }
-    } catch (IOException | CsvValidationException e) {
-      log.error("Error in Pass 1", e);
-      throw new RuntimeException("Pass 1 failed", e);
     }
   }
 
-  private void linkRelationships(File file) {
+  private void linkRelationships(File file) throws IOException, CsvValidationException {
     log.info("Pass 2: Linking relationships");
     try (CSVReader reader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).build()) {
       String[] line;
@@ -117,7 +112,12 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         String code = line[1].trim();
         if (code.isEmpty()) continue;
 
-        Course course = courseRepository.findById(code).orElseThrow();
+        Course course =
+            courseRepository
+                .findById(code)
+                .orElseThrow(
+                    () -> new AppException(ErrorCode.COURSE_NOT_FOUND, "Course code: " + code));
+
         course.setEquivalentCourses(new ArrayList<>());
         course.setRequirementRules(new ArrayList<>());
 
@@ -138,7 +138,7 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         if (!preCodes.isEmpty()) {
           RequirementRule rule = new RequirementRule();
           rule.setRuleType(RuleType.PREREQUISITE);
-          rule.setLogicType(LogicType.AND); // Default to AND
+          rule.setLogicType(LogicType.AND);
           preCodes.forEach(
               pCode -> {
                 courseRepository
@@ -159,7 +159,7 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         if (!prevCodes.isEmpty()) {
           RequirementRule rule = new RequirementRule();
           rule.setRuleType(RuleType.PREVIOUS);
-          rule.setLogicType(LogicType.AND); // Default to AND
+          rule.setLogicType(LogicType.AND);
           prevCodes.forEach(
               pCode -> {
                 courseRepository
@@ -177,9 +177,6 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
 
         courseRepository.save(course);
       }
-    } catch (IOException | CsvValidationException e) {
-      log.error("Error in Pass 2", e);
-      throw new RuntimeException("Pass 2 failed", e);
     }
   }
 

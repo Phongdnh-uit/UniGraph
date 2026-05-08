@@ -7,6 +7,5 @@ import org.springframework.data.neo4j.core.schema.Node;
 @Node("Department")
 @Data
 public class Department {
-    @Id
-    private String name;
+  @Id private String name;
 }
