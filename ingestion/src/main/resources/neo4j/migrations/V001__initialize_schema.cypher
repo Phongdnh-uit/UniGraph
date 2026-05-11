@@ -35,10 +35,10 @@ CREATE INDEX teacher_name_index IF NOT EXISTS FOR (t:Teacher) ON (t.name);
 // ---------------------------------------------------------
 
 // Khởi tạo Index cho tìm kiếm ngữ nghĩa trên mô tả môn học
-// Sử dụng 1536 dimensions (chuẩn OpenAI) và cosine similarity
+// Sử dụng 1024 dimensions (chuẩn bge-m3) và cosine similarity
 CREATE VECTOR INDEX course_embeddings IF NOT EXISTS
 FOR (c:Course) ON (c.embedding)
 OPTIONS {indexConfig: {
- `vector.dimensions`: 1536,
+ `vector.dimensions`: 1024,
  `vector.similarity_function`: 'cosine'
 }};

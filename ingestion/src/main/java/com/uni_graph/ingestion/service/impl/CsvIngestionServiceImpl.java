@@ -10,6 +10,7 @@ import com.uni_graph.ingestion.enums.RuleType;
 import com.uni_graph.ingestion.exception.AppException;
 import com.uni_graph.ingestion.repository.*;
 import com.uni_graph.ingestion.service.CsvIngestionService;
+import com.uni_graph.ingestion.service.EmbeddingService;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +29,7 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
   private final CourseRepository courseRepository;
   private final DepartmentRepository departmentRepository;
   private final RequirementRuleRepository ruleRepository;
+  private final EmbeddingService embeddingService;
 
   @Override
   @Transactional
@@ -97,6 +99,14 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         }
 
         course.setDepartment(department);
+
+        // Tạo văn bản giàu ngữ nghĩa (sẽ chưa có summary ở bước này)
+        String textToEmbed = embeddingService.buildTextToEmbed(course);
+        List<Double> vector = embeddingService.embedText(textToEmbed);
+        if (vector != null && !vector.isEmpty()) {
+          course.setEmbedding(vector);
+        }
+
         courseRepository.save(course);
       }
     }
@@ -186,5 +196,60 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
         .map(String::trim)
         .filter(s -> !s.isEmpty())
         .collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public void ingestCourseSummariesFromCsv(InputStream inputStream) {
+    log.info("Starting summary ingestion from CSV stream");
+    Path tempFile = null;
+    try {
+      tempFile = Files.createTempFile("summary-ingestion-", ".csv");
+      Files.copy(inputStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+      try (CSVReader reader =
+          new CSVReaderBuilder(new FileReader(tempFile.toFile())).withSkipLines(1).build()) {
+        String[] line;
+        int count = 0;
+        while ((line = reader.readNext()) != null) {
+          if (line.length < 3) continue;
+
+          String code = line[0].trim();
+          String summary = line[2].trim();
+
+          if (code.isEmpty() || summary.isEmpty()) continue;
+
+          Optional<Course> courseOpt = courseRepository.findById(code);
+          if (courseOpt.isPresent()) {
+            Course course = courseOpt.get();
+            course.setSummary(summary);
+
+            // Re-embed với nội dung mới đã có summary
+            String textToEmbed = embeddingService.buildTextToEmbed(course);
+            List<Double> vector = embeddingService.embedText(textToEmbed);
+            if (vector != null && !vector.isEmpty()) {
+              course.setEmbedding(vector);
+            }
+
+            courseRepository.save(course);
+            count++;
+          } else {
+            log.warn("Course code not found for summary: {}", code);
+          }
+        }
+        log.info("Successfully updated summaries and re-embedded {} courses.", count);
+      }
+    } catch (IOException | CsvValidationException e) {
+      log.error("Error during CSV summary ingestion", e);
+      throw new AppException(ErrorCode.INGESTION_FAILED, e.getMessage());
+    } finally {
+      if (tempFile != null) {
+        try {
+          Files.deleteIfExists(tempFile);
+        } catch (IOException e) {
+          log.warn("Failed to delete temp file: {}", tempFile);
+        }
+      }
+    }
   }
 }

@@ -69,4 +69,32 @@ public class IngestionController {
     return ResponseEntity.ok(
         ApiResponse.<String>builder().message("Data ingested successfully by crawler!").build());
   }
+
+  @Operation(
+      summary = "Ingest course summaries from a CSV file",
+      description =
+          "Upload a CSV file containing course summaries. Required columns: \n"
+              + "1. course_code (String)\n"
+              + "2. course_name_vi (String)\n"
+              + "3. course_summary (String)")
+  @PostMapping(value = "/summaries", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public ResponseEntity<ApiResponse<String>> ingestCourseSummaries(
+      @Parameter(
+              description = "CSV file to upload",
+              content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+          @RequestParam("file")
+          MultipartFile file)
+      throws IOException {
+
+    if (file.isEmpty()) {
+      throw new AppException(ErrorCode.CSV_VALIDATION_FAILED, "Please upload a CSV file.");
+    }
+
+    csvIngestionService.ingestCourseSummariesFromCsv(file.getInputStream());
+
+    return ResponseEntity.ok(
+        ApiResponse.<String>builder()
+            .message("Course summaries ingested and re-embedding triggered successfully!")
+            .build());
+  }
 }

@@ -19,6 +19,9 @@ public class Course {
   private String oldCode;
   private Integer theoryCredits;
   private Integer practiceCredits;
+  private String summary;
+
+  private List<Double> embedding;
 
   @Relationship(type = "BELONG_TO")
   private Department department;
