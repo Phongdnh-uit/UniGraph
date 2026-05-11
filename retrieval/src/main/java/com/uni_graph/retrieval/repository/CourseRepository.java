@@ -7,7 +7,9 @@ import org.springframework.data.neo4j.repository.query.Query;
 
 public interface CourseRepository extends Neo4jRepository<Course, String> {
 
-  @Query("MATCH (c:Course) WHERE c.titleVn CONTAINS $query OR c.titleEn CONTAINS $query RETURN c")
+  @Query(
+      "MATCH (c:Course) WHERE toLower(c.titleVn) CONTAINS toLower($query) OR toLower(c.titleEn) CONTAINS toLower($query) "
+          + "RETURN c LIMIT 10")
   List<Course> searchByKeyword(String query);
 
   @Query(
