@@ -65,4 +65,25 @@ class SearchServiceImplTest {
         verify(courseRepository).searchByVector(anyList(), anyInt());
         verify(courseRepository).searchByKeyword(query);
     }
+
+    @Test
+    void hybridSearch_shouldFallbackToKeywordSearch_whenEmbeddingFails() {
+        // Arrange
+        String query = "AI";
+        when(embeddingModel.embed(query)).thenThrow(new RuntimeException("AI Provider down"));
+
+        Course c2 = new Course();
+        c2.setCode("AI101");
+        c2.setTitleVn("Artificial Intelligence");
+
+        when(courseRepository.searchByKeyword(query)).thenReturn(List.of(c2));
+
+        // Act
+        List<Course> results = searchService.hybridSearch(query);
+
+        // Assert
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getCode()).isEqualTo("AI101");
+        verify(courseRepository).searchByKeyword(query);
+    }
 }

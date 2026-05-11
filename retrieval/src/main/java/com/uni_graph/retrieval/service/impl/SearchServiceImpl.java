@@ -18,10 +18,15 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Course> hybridSearch(String query) {
         // 1. Vector Search
-        var embeddingContent = embeddingModel.embed(query).content();
-        List<Double> vector = new ArrayList<>();
-        for (float f : embeddingContent.vector()) vector.add((double) f);
-        List<Course> vectorResults = courseRepository.searchByVector(vector, 5);
+        List<Course> vectorResults = new ArrayList<>();
+        try {
+            var embeddingContent = embeddingModel.embed(query).content();
+            List<Double> vector = new ArrayList<>();
+            for (float f : embeddingContent.vector()) vector.add((double) f);
+            vectorResults = courseRepository.searchByVector(vector, 5);
+        } catch (Exception e) {
+            // Log error or handle gracefully - here we fallback to empty vector results
+        }
 
         // 2. Keyword Search
         List<Course> keywordResults = courseRepository.searchByKeyword(query);
