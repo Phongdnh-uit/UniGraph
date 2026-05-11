@@ -19,15 +19,28 @@ public class ChatServiceImpl implements ChatService {
     public String chat(String message) {
         List<Course> contextCourses = searchService.hybridSearch(message);
         
-        String context = contextCourses.stream()
-            .map(c -> String.format("Môn %s (%s): %s", c.getTitleVn(), c.getCode(), c.getSummary()))
-            .collect(Collectors.joining("\n"));
+        String prompt;
+        if (contextCourses.isEmpty()) {
+            prompt = String.format(
+                "Bạn là trợ lý học tập. Tôi không tìm thấy thông tin nào về các môn học liên quan đến: %s. " +
+                "Hãy trả lời người dùng rằng bạn không tìm thấy thông tin và có thể gợi ý họ hỏi về các môn học khác.",
+                message
+            );
+        } else {
+            String context = contextCourses.stream()
+                .map(c -> String.format("Môn %s (%s): %s", c.getTitleVn(), c.getCode(), c.getSummary()))
+                .collect(Collectors.joining("\n"));
 
-        String prompt = String.format(
-            "Bạn là trợ lý học tập. Dựa vào thông tin các môn học sau đây:\n%s\n\nHãy trả lời câu hỏi: %s",
-            context, message
-        );
+            prompt = String.format(
+                "Bạn là trợ lý học tập. Dựa vào thông tin các môn học sau đây:\n%s\n\nHãy trả lời câu hỏi: %s",
+                context, message
+            );
+        }
 
-        return chatModel.generate(prompt);
+        try {
+            return chatModel.generate(prompt);
+        } catch (Exception e) {
+            return "Xin lỗi, dịch vụ tư vấn đang gặp sự cố. Vui lòng thử lại sau.";
+        }
     }
 }

@@ -51,4 +51,33 @@ class ChatServiceImplTest {
         verify(searchService).hybridSearch(message);
         verify(chatModel).generate(anyString());
     }
+
+    @Test
+    void chat_shouldHandleEmptyContext() {
+        // Arrange
+        String message = "Môn học bí ẩn";
+        when(searchService.hybridSearch(message)).thenReturn(List.of());
+        when(chatModel.generate(anyString())).thenReturn("Xin lỗi, tôi không tìm thấy thông tin về môn học này.");
+
+        // Act
+        String response = chatService.chat(message);
+
+        // Assert
+        assertThat(response).isNotEmpty();
+        verify(chatModel).generate(anyString());
+    }
+
+    @Test
+    void chat_shouldHandleChatModelFailure() {
+        // Arrange
+        String message = "Hello";
+        when(searchService.hybridSearch(message)).thenReturn(List.of());
+        when(chatModel.generate(anyString())).thenThrow(new RuntimeException("Chat service down"));
+
+        // Act
+        String response = chatService.chat(message);
+
+        // Assert
+        assertThat(response).contains("đang gặp sự cố");
+    }
 }
