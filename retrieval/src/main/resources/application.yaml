@@ -12,3 +12,5 @@ ai:
     base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
     embedding-model: ${OLLAMA_EMBEDDING_MODEL:bge-m3}
     chat-model: ${OLLAMA_CHAT_MODEL:llama3}
+    embedding-timeout: 60s
+    chat-timeout: 120s
