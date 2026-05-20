@@ -1,7 +1,7 @@
-package com.uni_graph.ingestion.exception;
+package com.uni_graph.common.exception;
 
-import com.uni_graph.ingestion.dto.ApiResponse;
-import com.uni_graph.ingestion.enums.ErrorCode;
+import com.uni_graph.common.dto.ApiResponse;
+import com.uni_graph.common.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;

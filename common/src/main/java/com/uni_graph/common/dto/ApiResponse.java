@@ -1,4 +1,4 @@
-package com.uni_graph.ingestion.dto;
+package com.uni_graph.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.uni_graph.ingestion.domain;
+package com.uni_graph.common.domain;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.uni_graph.ingestion.enums;
+package com.uni_graph.common.enums;
 
 public enum RuleType {
   PREREQUISITE,

@@ -1,6 +1,6 @@
-package com.uni_graph.ingestion.exception;
+package com.uni_graph.common.exception;
 
-import com.uni_graph.ingestion.enums.ErrorCode;
+import com.uni_graph.common.enums.ErrorCode;
 import java.io.Serial;
 import lombok.Getter;
 

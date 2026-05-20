@@ -1,7 +1,7 @@
-package com.uni_graph.ingestion.domain;
+package com.uni_graph.common.domain;
 
-import com.uni_graph.ingestion.enums.LogicType;
-import com.uni_graph.ingestion.enums.RuleType;
+import com.uni_graph.common.enums.LogicType;
+import com.uni_graph.common.enums.RuleType;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
