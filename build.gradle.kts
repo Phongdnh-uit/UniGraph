@@ -1,7 +1,7 @@
 plugins {
     java
     id("com.diffplug.spotless") version "8.2.1" apply false
-    id("org.springframework.boot") version "4.0.4" apply false
+    id("org.springframework.boot") version "4.0.6" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
 }
 
@@ -18,11 +18,11 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(25)
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
 
-    spotless {
+    extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
             target("**/src/**/*.java")
             googleJavaFormat()
@@ -30,5 +30,9 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
     }
 }
