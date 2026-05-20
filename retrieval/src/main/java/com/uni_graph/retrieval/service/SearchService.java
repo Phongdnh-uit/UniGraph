@@ -4,5 +4,5 @@ import com.uni_graph.retrieval.domain.Course;
 import java.util.List;
 
 public interface SearchService {
-    List<Course> hybridSearch(String query);
+  List<Course> hybridSearch(String query);
 }

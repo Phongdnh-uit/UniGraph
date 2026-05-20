@@ -207,6 +207,8 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
       tempFile = Files.createTempFile("summary-ingestion-", ".csv");
       Files.copy(inputStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
+      List<String> allCourseCodes = courseRepository.findAllCodes();
+
       try (CSVReader reader =
           new CSVReaderBuilder(new FileReader(tempFile.toFile())).withSkipLines(1).build()) {
         String[] line;
@@ -229,6 +231,20 @@ public class CsvIngestionServiceImpl implements CsvIngestionService {
             List<Double> vector = embeddingService.embedText(textToEmbed);
             if (vector != null && !vector.isEmpty()) {
               course.setEmbedding(vector);
+            }
+
+            // Trích xuất kiến thức nền tảng từ summary bằng LLM
+            List<String> extractedCodes =
+                embeddingService.extractKnowledgePrerequisites(summary, allCourseCodes);
+            for (String exCode : extractedCodes) {
+              courseRepository
+                  .findById(exCode)
+                  .ifPresent(
+                      preCourse -> {
+                        if (!course.getKnowledgePrerequisites().contains(preCourse)) {
+                          course.getKnowledgePrerequisites().add(preCourse);
+                        }
+                      });
             }
 
             courseRepository.save(course);

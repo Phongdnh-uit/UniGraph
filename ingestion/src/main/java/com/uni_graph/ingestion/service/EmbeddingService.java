@@ -19,4 +19,13 @@ public interface EmbeddingService {
    * @return Văn bản hoàn chỉnh để đưa vào mô hình AI
    */
   String buildTextToEmbed(Course course);
+
+  /**
+   * Trích xuất các môn học kiến thức nền tảng dựa trên tóm tắt.
+   *
+   * @param summary Tóm tắt môn học
+   * @param allCourseCodes Danh sách tất cả mã môn học hiện có
+   * @return Danh sách các mã môn học nền tảng
+   */
+  List<String> extractKnowledgePrerequisites(String summary, List<String> allCourseCodes);
 }
