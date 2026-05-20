@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.common.domain.Course;
 import com.uni_graph.retrieval.repository.CourseRepository;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.model.embedding.EmbeddingModel;

@@ -1,6 +1,6 @@
 package com.uni_graph.retrieval.repository;
 
-import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.common.domain.Course;
 import java.util.List;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;

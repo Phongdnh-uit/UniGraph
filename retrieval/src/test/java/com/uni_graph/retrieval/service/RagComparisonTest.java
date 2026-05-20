@@ -1,6 +1,6 @@
 package com.uni_graph.retrieval.service;
 
-import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.common.domain.Course;
 import com.uni_graph.retrieval.repository.CourseRepository;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
