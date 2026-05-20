@@ -37,4 +37,7 @@ public class Course {
 
   @Relationship(type = "REQUIRES")
   private List<RequirementRule> requirementRules = new ArrayList<>();
+
+  @Relationship(type = "KNOWLEDGE_PREREQUISITE")
+  private List<Course> knowledgePrerequisites = new ArrayList<>();
 }
