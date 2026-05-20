@@ -9,11 +9,6 @@ spring:
       readiness:
         tcp:
           read-timeout: 2m
-  neo4j:
-    uri: bolt://localhost:7687
-    authentication:
-      username: neo4j
-      password: notverysecret
   ai:
     vectorstore:
       neo4j:
