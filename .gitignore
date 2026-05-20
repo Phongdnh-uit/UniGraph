@@ -1,0 +1,10 @@
+.worktrees/
+.idea/
+.vscode/
+*.log
+.venv/
+node_modules/
+build/
+.gradle/
+bin/
+out/

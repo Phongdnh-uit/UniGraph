@@ -1,0 +1,49 @@
+package com.uni_graph.retrieval.service.impl;
+
+import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.retrieval.service.ChatService;
+import com.uni_graph.retrieval.service.SearchService;
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ChatServiceImpl implements ChatService {
+  private final SearchService searchService;
+  private final ChatLanguageModel chatModel;
+
+  @Override
+  public String chat(String message) {
+    List<Course> contextCourses = searchService.hybridSearch(message);
+
+    String prompt;
+    if (contextCourses.isEmpty()) {
+      prompt =
+          String.format(
+              "Bạn là trợ lý học tập. Tôi không tìm thấy thông tin nào về các môn học liên quan đến: %s. "
+                  + "Hãy trả lời người dùng rằng bạn không tìm thấy thông tin và có thể gợi ý họ hỏi về các môn học khác.",
+              message);
+    } else {
+      String context =
+          contextCourses.stream()
+              .map(
+                  c ->
+                      String.format("Môn %s (%s): %s", c.getTitleVn(), c.getCode(), c.getSummary()))
+              .collect(Collectors.joining("\n"));
+
+      prompt =
+          String.format(
+              "Bạn là trợ lý học tập. Dựa vào thông tin các môn học sau đây:\n%s\n\nHãy trả lời câu hỏi: %s",
+              context, message);
+    }
+
+    try {
+      return chatModel.generate(prompt);
+    } catch (Exception e) {
+      return "Xin lỗi, dịch vụ tư vấn đang gặp sự cố. Vui lòng thử lại sau.";
+    }
+  }
+}
