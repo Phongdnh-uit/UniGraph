@@ -4,7 +4,11 @@ spring:
       on-profile: local
   docker:
     compose:
-      file: docker/local/compose.yaml
+      file: ../docker/compose.yaml
+      lifecycle-management: start-and-stop
+      readiness:
+        tcp:
+          read-timeout: 2m
   neo4j:
     uri: bolt://localhost:7687
     authentication:
