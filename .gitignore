@@ -10,3 +10,4 @@ bin/
 out/
 .gradle/
 build/
+docker/data/
