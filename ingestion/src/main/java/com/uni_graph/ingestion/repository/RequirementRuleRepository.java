@@ -1,6 +1,6 @@
 package com.uni_graph.ingestion.repository;
 
-import com.uni_graph.ingestion.domain.RequirementRule;
+import com.uni_graph.common.domain.RequirementRule;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.uni_graph.ingestion.controllers;
 
-import com.uni_graph.ingestion.dto.ApiResponse;
-import com.uni_graph.ingestion.enums.ErrorCode;
-import com.uni_graph.ingestion.exception.AppException;
+import com.uni_graph.common.dto.ApiResponse;
+import com.uni_graph.common.enums.ErrorCode;
+import com.uni_graph.common.exception.AppException;
 import com.uni_graph.ingestion.service.CsvIngestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

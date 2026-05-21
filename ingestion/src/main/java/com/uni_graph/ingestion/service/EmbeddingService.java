@@ -1,6 +1,6 @@
 package com.uni_graph.ingestion.service;
 
-import com.uni_graph.ingestion.domain.Course;
+import com.uni_graph.common.domain.Course;
 import java.util.List;
 
 public interface EmbeddingService {

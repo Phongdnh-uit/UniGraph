@@ -1,6 +1,6 @@
 package com.uni_graph.retrieval.service.impl;
 
-import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.common.domain.Course;
 import com.uni_graph.retrieval.repository.CourseRepository;
 import com.uni_graph.retrieval.service.CypherGenerator;
 import com.uni_graph.retrieval.service.SearchService;

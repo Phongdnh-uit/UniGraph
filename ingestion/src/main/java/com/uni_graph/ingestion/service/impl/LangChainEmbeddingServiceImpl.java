@@ -1,6 +1,6 @@
 package com.uni_graph.ingestion.service.impl;
 
-import com.uni_graph.ingestion.domain.Course;
+import com.uni_graph.common.domain.Course;
 import com.uni_graph.ingestion.service.EmbeddingService;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.model.chat.ChatLanguageModel;

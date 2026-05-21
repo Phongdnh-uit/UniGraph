@@ -5,7 +5,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.uni_graph.retrieval.domain.Course;
+import com.uni_graph.common.domain.Course;
 import com.uni_graph.retrieval.service.SearchService;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.List;
