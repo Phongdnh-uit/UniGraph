@@ -3,16 +3,3 @@ spring:
     active: local
   application:
     name: retrieval
-  data:
-    neo4j:
-      uri: ${NEO4J_URI:bolt://localhost:7687}
-      username: ${NEO4J_USERNAME:neo4j}
-      password: ${NEO4J_PASSWORD:password}
-
-ai:
-  ollama:
-    base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
-    embedding-model: ${OLLAMA_EMBEDDING_MODEL:bge-m3}
-    chat-model: ${OLLAMA_CHAT_MODEL:llama3}
-    embedding-timeout: 60s
-    chat-timeout: 120s

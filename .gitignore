@@ -11,3 +11,8 @@ out/
 .gradle/
 build/
 docker/data/
+.classpath
+.project
+.settings/
+.factorypath
+docker/data/

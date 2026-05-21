@@ -3,8 +3,3 @@ spring:
     name: ingestion
   profiles:
     active: local
-
-ai:
-  ollama:
-    base-url: "http://localhost:11434"
-    embedding-model: "Vietnamese_Embedding_V2"
