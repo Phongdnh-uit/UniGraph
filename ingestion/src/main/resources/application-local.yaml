@@ -22,6 +22,6 @@ spring:
 
 ai:
   ollama:
-    base-url: "http://localhost:11434"
+    base-url: http://localhost:11434
     embedding-model: embeddinggemma:latest
     chat-model: gemma4:e2b-it-q4_K_M
