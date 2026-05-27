@@ -36,7 +36,11 @@ public class CypherGeneratorImpl implements CypherGenerator {
       Instructions:
       1. Return ONLY the Cypher query. No preamble, no explanation, no backticks.
       2. Use case-insensitive matching for string properties if appropriate (e.g., using toLower()).
-      3. If the question cannot be answered by Cypher, return an empty string.
+      3. CRITICAL: If the user asks about properties or relationships of a specific course (e.g., "Môn MAT23 có môn tương đương không?"), you MUST return the Course node with that code.
+      4. DO NOT traverse the relationship in Cypher if the goal is to find related courses of a specific course. Just return the main course.
+      5. Correct: MATCH (c:Course {code: 'MAT23'}) RETURN c
+      6. Incorrect: MATCH (c1:Course {code: 'MAT23'})-[:EQUIVALENT_TO]->(c2:Course) RETURN c2
+      7. If the question cannot be answered by Cypher, return an empty string.
 
       Question: %s
       """;

@@ -4,7 +4,7 @@ spring:
       on-profile: local
   docker:
     compose:
-      file: ./docker/compose.yaml
+      file: ./../docker/compose.yaml
       lifecycle-management: start-and-stop
   ai:
     vectorstore:

@@ -15,7 +15,7 @@ public class RetrievalController {
   private final ChatService chatService;
 
   @GetMapping("/search")
-  public List<Course> search(@RequestParam String q) {
+  public List<Course> search(@RequestParam("query") String q) {
     return searchService.hybridSearch(q);
   }
 
