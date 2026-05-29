@@ -4,15 +4,15 @@ spring:
       on-profile: local
   docker:
     compose:
-      file: ./../docker/compose.yaml
+      file: ./docker/compose.yaml
       lifecycle-management: start-and-stop
   ai:
     vectorstore:
       neo4j:
         initialize-schema: true
         database-name: neo4j
-        index-name: custom-index
-        embedding-dimension: 1536
+        index-name: course_embeddings
+        embedding-dimension: 768
         distance-type: cosine
   neo4j:
     uri: bolt://localhost:7687

@@ -15,6 +15,6 @@ spring:
       neo4j:
         initialize-schema: true
         database-name: ${NEO4J_DATABASE}
-        index-name: custom-index
-        embedding-dimension: 1536
+        index-name: course_embeddings
+        embedding-dimension: 768
         distance-type: cosine

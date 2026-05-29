@@ -1,6 +1,7 @@
 package com.uni_graph.retrieval.service.impl;
 
 import com.uni_graph.common.domain.Course;
+import com.uni_graph.common.util.PerformanceProfiler;
 import com.uni_graph.retrieval.repository.CourseRepository;
 import com.uni_graph.retrieval.service.CypherGenerator;
 import com.uni_graph.retrieval.service.SearchService;
@@ -24,38 +25,58 @@ public class SearchServiceImpl implements SearchService {
 
   @Override
   public List<Course> hybridSearch(String query) {
+    PerformanceProfiler profiler = new PerformanceProfiler("Hybrid Search: " + query, log);
+
     // 1. Try Cypher Search first (Reasoning Chain)
     try {
+      profiler.start("1. Cypher Generation");
       String cypher = cypherGenerator.generate(query);
       if (cypher != null && !cypher.isBlank()) {
         log.info("Generated Cypher: {}", cypher);
+
+        profiler.start("2. Neo4j Cypher Execution");
         List<Course> cypherResults = neo4jTemplate.findAll(cypher, Map.of(), Course.class);
+
         if (!cypherResults.isEmpty()) {
+          profiler.start("3. Result Hydration");
           log.info("Cypher search found {} results", cypherResults.size());
           List<Course> hydratedResults = new ArrayList<>();
           for (Course c : cypherResults) {
-            courseRepository.findById(c.getCode()).ifPresent(course -> {
-              hydratedResults.add(course);
-              // Lấy thêm các môn học có quan hệ ngược lại (để biết c là môn tương đương của môn nào)
-              String reverseCypher = String.format(
-                  "MATCH (src:Course)-[:EQUIVALENT_TO|KNOWLEDGE_PREREQUISITE|REQUIRES]->(target:Course {code: '%s'}) " +
-                  "RETURN src", course.getCode());
-              List<Course> sources = neo4jTemplate.findAll(reverseCypher, Map.of(), Course.class);
-              for (Course s : sources) {
-                courseRepository.findById(s.getCode()).ifPresent(hydratedResults::add);
-              }
-            });
+            courseRepository
+                .findById(c.getCode())
+                .ifPresent(
+                    course -> {
+                      hydratedResults.add(course);
+                      // Lấy thêm các môn học có quan hệ ngược lại (để biết c là môn tương đương của
+                      // môn nào)
+                      String reverseCypher =
+                          String.format(
+                              "MATCH (src:Course)-[:EQUIVALENT_TO|KNOWLEDGE_PREREQUISITE|REQUIRES]->(target:Course {code: '%s'}) "
+                                  + "RETURN src",
+                              course.getCode());
+                      List<Course> sources =
+                          neo4jTemplate.findAll(reverseCypher, Map.of(), Course.class);
+                      for (Course s : sources) {
+                        courseRepository.findById(s.getCode()).ifPresent(hydratedResults::add);
+                      }
+                    });
           }
           // Loại bỏ trùng lặp nếu có
-          return hydratedResults.stream()
-              .filter(distinctByKey(Course::getCode))
-              .toList();
+          List<Course> finalResults =
+              hydratedResults.stream().filter(distinctByKey(Course::getCode)).toList();
+
+          profiler.logSummary();
+          return finalResults;
         }
       }
     } catch (Exception e) {
       log.error("Cypher search failed, falling back to vector/keyword", e);
     }
-    return fallbackSearch(query);
+
+    profiler.start("4. Fallback Search (Vector/Keyword)");
+    List<Course> results = fallbackSearch(query);
+    profiler.logSummary();
+    return results;
   }
 
   private List<Course> fallbackSearch(String query) {
@@ -83,7 +104,8 @@ public class SearchServiceImpl implements SearchService {
     return results;
   }
 
-  public static <T> java.util.function.Predicate<T> distinctByKey(java.util.function.Function<? super T, ?> keyExtractor) {
+  public static <T> java.util.function.Predicate<T> distinctByKey(
+      java.util.function.Function<? super T, ?> keyExtractor) {
     Map<Object, Boolean> seen = new java.util.concurrent.ConcurrentHashMap<>();
     return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
   }

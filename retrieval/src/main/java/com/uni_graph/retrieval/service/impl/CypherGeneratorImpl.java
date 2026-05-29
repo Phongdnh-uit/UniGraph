@@ -1,6 +1,7 @@
 package com.uni_graph.retrieval.service.impl;
 
 import com.uni_graph.retrieval.service.CypherGenerator;
+import com.uni_graph.retrieval.service.SchemaService;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class CypherGeneratorImpl implements CypherGenerator {
 
   private final ChatLanguageModel chatLanguageModel;
+  private final SchemaService schemaService;
 
   private static final String SYSTEM_PROMPT =
       """
@@ -19,35 +21,25 @@ public class CypherGeneratorImpl implements CypherGenerator {
       Given a user question, generate a Cypher query to answer it.
 
       Schema:
-      - Nodes:
-        - Course (code, titleVn, titleEn, summary, status, courseType, theoryCredits, practiceCredits)
-        - Teacher (id, email, name)
-        - Department (name)
-        - Section (section_id)
-        - Semester (name)
-      - Relationships:
-        - (Course)-[:BELONG_TO]->(Department)
-        - (Teacher)-[:BELONG_TO]->(Department)
-        - (Teacher)-[:TEACHES]->(Section)
-        - (Course)-[:OFFERED_AS]->(Section)
-        - (Course)-[:KNOWLEDGE_PREREQUISITE]->(Course)
-        - (Course)-[:EQUIVALENT_TO]->(Course)
+      %s
 
       Instructions:
       1. Return ONLY the Cypher query. No preamble, no explanation, no backticks.
       2. Use case-insensitive matching for string properties if appropriate (e.g., using toLower()).
-      3. CRITICAL: If the user asks about properties or relationships of a specific course (e.g., "Môn MAT23 có môn tương đương không?"), you MUST return the Course node with that code.
-      4. DO NOT traverse the relationship in Cypher if the goal is to find related courses of a specific course. Just return the main course.
-      5. Correct: MATCH (c:Course {code: 'MAT23'}) RETURN c
-      6. Incorrect: MATCH (c1:Course {code: 'MAT23'})-[:EQUIVALENT_TO]->(c2:Course) RETURN c2
-      7. If the question cannot be answered by Cypher, return an empty string.
+      3. CRITICAL: For prerequisite or previous course questions, you MUST traverse through RequirementRule.
+         Example for "Prerequisites of EN001":
+         MATCH (c:Course {code: 'EN001'})-[:REQUIRES]->(r:RequirementRule {ruleType: 'PREREQUISITE'})-[:SATISFIED_BY]->(p:Course) RETURN p
+      4. If the user asks about properties or relationships of a specific course (e.g., "Môn MAT23 có môn tương đương không?"), you MUST return the Course node with that code to allow the system to hydrate all its relationships.
+         Correct: MATCH (c:Course {code: 'MAT23'}) RETURN c
+      5. If the question cannot be answered by Cypher, return an empty string.
 
       Question: %s
       """;
 
   @Override
   public String generate(String question) {
-    String prompt = String.format(SYSTEM_PROMPT, question);
+    String schema = schemaService.getFormattedSchema();
+    String prompt = String.format(SYSTEM_PROMPT, schema, question);
     try {
       String response = chatLanguageModel.generate(prompt).trim();
       // Remove potential markdown formatting
