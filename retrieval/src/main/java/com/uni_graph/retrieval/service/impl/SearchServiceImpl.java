@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.neo4j.driver.types.Node;
+import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class SearchServiceImpl implements SearchService {
   private final EmbeddingModel embeddingModel;
   private final CypherGenerator cypherGenerator;
   private final Neo4jTemplate neo4jTemplate;
+  private final Neo4jClient neo4jClient;
 
   @Override
   public List<Course> hybridSearch(String query) {
@@ -31,43 +34,103 @@ public class SearchServiceImpl implements SearchService {
     try {
       profiler.start("1. Cypher Generation");
       String cypher = cypherGenerator.generate(query);
+
+      // Heuristic: Extract course codes from query to ensure subject is hydrated
+      List<String> codesToHydrate = new ArrayList<>();
+      java.util.regex.Matcher matcher =
+          java.util.regex.Pattern.compile("[A-Z]{2,4}[0-9]{3,4}").matcher(query.toUpperCase());
+      while (matcher.find()) {
+        codesToHydrate.add(matcher.group());
+      }
+
       if (cypher != null && !cypher.isBlank()) {
         log.info("Generated Cypher: {}", cypher);
 
         profiler.start("2. Neo4j Cypher Execution");
-        List<Course> cypherResults = neo4jTemplate.findAll(cypher, Map.of(), Course.class);
+        // Use a more flexible approach to capture results (nodes or just codes)
+        neo4jClient
+            .query(cypher)
+            .fetch()
+            .all()
+            .forEach(
+                row -> {
+                  row.values()
+                      .forEach(
+                          val -> {
+                            if (val instanceof String s) {
+                              codesToHydrate.add(s);
+                            } else if (val instanceof Node node) {
+                              if (node.hasLabel("Course")) {
+                                codesToHydrate.add(node.get("code").asString());
+                              }
+                            } else if (val instanceof Map<?, ?> map && map.containsKey("code")) {
+                              Object codeVal = map.get("code");
+                              if (codeVal != null) {
+                                codesToHydrate.add(codeVal.toString());
+                              }
+                            }
+                          });
+                });
+      }
 
-        if (!cypherResults.isEmpty()) {
-          profiler.start("3. Result Hydration");
-          log.info("Cypher search found {} results", cypherResults.size());
-          List<Course> hydratedResults = new ArrayList<>();
-          for (Course c : cypherResults) {
-            courseRepository
-                .findById(c.getCode())
-                .ifPresent(
-                    course -> {
-                      hydratedResults.add(course);
-                      // Lấy thêm các môn học có quan hệ ngược lại (để biết c là môn tương đương của
-                      // môn nào)
-                      String reverseCypher =
-                          String.format(
-                              "MATCH (src:Course)-[:EQUIVALENT_TO|KNOWLEDGE_PREREQUISITE|REQUIRES]->(target:Course {code: '%s'}) "
-                                  + "RETURN src",
-                              course.getCode());
-                      List<Course> sources =
-                          neo4jTemplate.findAll(reverseCypher, Map.of(), Course.class);
-                      for (Course s : sources) {
-                        courseRepository.findById(s.getCode()).ifPresent(hydratedResults::add);
-                      }
-                    });
-          }
-          // Loại bỏ trùng lặp nếu có
-          List<Course> finalResults =
-              hydratedResults.stream().filter(distinctByKey(Course::getCode)).toList();
+      if (!codesToHydrate.isEmpty()) {
+        profiler.start("3. Result Hydration");
+        List<String> uniqueCodes =
+            codesToHydrate.stream()
+                .distinct()
+                .limit(15) // Limit initial subjects to prevent explosion
+                .toList();
+        log.info("Hydrating {} codes", uniqueCodes.size());
 
-          profiler.logSummary();
-          return finalResults;
+        List<Course> hydratedResults = new ArrayList<>();
+        for (String code : uniqueCodes) {
+          courseRepository
+              .findById(code)
+              .ifPresent(
+                  course -> {
+                    hydratedResults.add(course);
+
+                    // Enrich context by finding related courses (both directions)
+                    String enrichmentCypher =
+                        String.format(
+                            "MATCH (c:Course {code: '%s'}) "
+                                + "OPTIONAL MATCH (c)-[:EQUIVALENT_TO|KNOWLEDGE_PREREQUISITE]->(r1:Course) "
+                                + "OPTIONAL MATCH (r2:Course)-[:EQUIVALENT_TO|KNOWLEDGE_PREREQUISITE]->(c) "
+                                + "OPTIONAL MATCH (c)-[:REQUIRES]->(:RequirementRule)-[:SATISFIED_BY]->(r3:Course) "
+                                + "OPTIONAL MATCH (r4:Course)-[:REQUIRES]->(:RequirementRule)-[:SATISFIED_BY]->(c) "
+                                + "RETURN DISTINCT collect(r1.code) + collect(r2.code) + collect(r3.code) + collect(r4.code) as related",
+                            course.getCode());
+
+                    neo4jClient
+                        .query(enrichmentCypher)
+                        .fetch()
+                        .one()
+                        .ifPresent(
+                            row -> {
+                              List<String> relatedCodes = (List<String>) row.get("related");
+                              if (relatedCodes != null) {
+                                relatedCodes.stream()
+                                    .filter(java.util.Objects::nonNull)
+                                    .distinct()
+                                    .limit(5) // Limit neighbors per course
+                                    .forEach(
+                                        rc ->
+                                            courseRepository
+                                                .findById(rc)
+                                                .ifPresent(hydratedResults::add));
+                              }
+                            });
+                  });
+
+          if (hydratedResults.size() > 25) break; // Hard limit for entire context
         }
+
+        // Remove duplicates
+        List<Course> finalResults =
+            hydratedResults.stream().filter(distinctByKey(Course::getCode)).toList();
+
+        profiler.logSummary();
+        return finalResults;
       }
     } catch (Exception e) {
       log.error("Cypher search failed, falling back to vector/keyword", e);

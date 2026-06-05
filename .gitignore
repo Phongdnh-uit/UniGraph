@@ -16,3 +16,7 @@ docker/data/
 .settings/
 .factorypath
 docker/data/
+.env
+subjects.csv
+subject_summary.csv
+links_ctdt_tu_*.csv

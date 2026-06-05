@@ -3,7 +3,7 @@ package com.uni_graph.retrieval.service.impl;
 import com.uni_graph.common.domain.Course;
 import com.uni_graph.retrieval.service.ChatService;
 import com.uni_graph.retrieval.service.SearchService;
-import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.chat.ChatModel;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ChatServiceImpl implements ChatService {
   private final SearchService searchService;
-  private final ChatLanguageModel chatModel;
+  private final ChatModel chatModel;
 
   @Override
   public String chat(String message) {
@@ -25,9 +25,10 @@ public class ChatServiceImpl implements ChatService {
     if (contextCourses.isEmpty()) {
       prompt =
           String.format(
-              "Bạn là trợ lý tư vấn học tập thông minh. Tôi không tìm thấy dữ liệu nào về môn học này trong cơ sở dữ liệu. "
-                  + "Hãy trả lời rằng bạn không tìm thấy thông tin cụ thể trong hệ thống UniGraph và khuyến khích người dùng kiểm tra lại mã môn hoặc tên môn. "
-                  + "Câu hỏi của người dùng: %s",
+              "Bạn là trợ lý tư vấn học tập thông minh. Tôi không tìm thấy dữ liệu nào về môn học"
+                  + " này trong cơ sở dữ liệu. Hãy trả lời rằng bạn không tìm thấy thông tin cụ thể"
+                  + " trong hệ thống UniGraph và khuyến khích người dùng kiểm tra lại mã môn hoặc"
+                  + " tên môn. Câu hỏi của người dùng: %s",
               message);
     } else {
       String context =
@@ -35,36 +36,55 @@ public class ChatServiceImpl implements ChatService {
               .map(
                   c -> {
                     StringBuilder sb = new StringBuilder();
-                    sb.append(String.format("THÔNG TIN MÔN %s (%s):\n", c.getTitleVn(), c.getCode()));
-                    sb.append(String.format("- Khoa: %s\n", c.getDepartment() != null ? c.getDepartment().getName() : "N/A"));
-                    sb.append(String.format("- Tín chỉ: %d Lý thuyết, %d Thực hành\n", c.getTheoryCredits(), c.getPracticeCredits()));
-                    sb.append(String.format("- Trạng thái: %s\n", c.getStatus()));
-                    sb.append(String.format("- Loại môn: %s\n", c.getCourseType()));
-                    sb.append(String.format("- Tóm tắt: %s\n", c.getSummary() != null ? c.getSummary() : "Không có tóm tắt."));
+                    sb.append(
+                        String.format("### MÔN HỌC: %s (Mã: %s)\n", c.getTitleVn(), c.getCode()));
+                    sb.append(
+                        String.format(
+                            "- Khoa: %s | Tín chỉ: %d LT, %d TH\n",
+                            c.getDepartment() != null ? c.getDepartment().getName() : "N/A",
+                            c.getTheoryCredits(),
+                            c.getPracticeCredits()));
+                    sb.append(
+                        String.format(
+                            "- Trạng thái: %s | Loại môn: %s\n", c.getStatus(), c.getCourseType()));
+
+                    if (c.getSummary() != null && !c.getSummary().isBlank()) {
+                      sb.append(String.format("- Tóm tắt: %s\n", c.getSummary()));
+                    }
 
                     if (!c.getEquivalentCourses().isEmpty()) {
-                      sb.append("- CÁC MÔN TƯƠNG ĐƯƠNG CỦA MÔN NÀY: ")
-                          .append(c.getEquivalentCourses().stream()
-                              .map(eq -> eq.getTitleVn() + " (" + eq.getCode() + ")")
-                              .collect(Collectors.joining(", ")))
+                      sb.append("- [QUAN HỆ] MÔN TƯƠNG ĐƯƠNG: ")
+                          .append(
+                              c.getEquivalentCourses().stream()
+                                  .map(
+                                      eq -> String.format("%s (%s)", eq.getTitleVn(), eq.getCode()))
+                                  .collect(Collectors.joining(", ")))
                           .append("\n");
                     }
 
                     if (!c.getKnowledgePrerequisites().isEmpty()) {
-                      sb.append("- KIẾN THỨC NỀN TẢNG CẦN CÓ: ")
-                          .append(c.getKnowledgePrerequisites().stream()
-                              .map(kp -> kp.getTitleVn() + " (" + kp.getCode() + ")")
-                              .collect(Collectors.joining(", ")))
+                      sb.append("- [QUAN HỆ] KIẾN THỨC NỀN TẢNG: ")
+                          .append(
+                              c.getKnowledgePrerequisites().stream()
+                                  .map(
+                                      kp -> String.format("%s (%s)", kp.getTitleVn(), kp.getCode()))
+                                  .collect(Collectors.joining(", ")))
                           .append("\n");
                     }
 
                     if (!c.getRequirementRules().isEmpty()) {
                       for (var rule : c.getRequirementRules()) {
-                        String type = rule.getRuleType().name().equals("PREREQUISITE") ? "TIÊN QUYẾT" : "HỌC TRƯỚC";
-                        sb.append(String.format("- MÔN %s: ", type))
-                            .append(rule.getSatisfiedByCourses().stream()
-                                .map(rc -> rc.getTitleVn() + " (" + rc.getCode() + ")")
-                                .collect(Collectors.joining(", ")))
+                        String type =
+                            rule.getRuleType().name().equals("PREREQUISITE")
+                                ? "TIÊN QUYẾT"
+                                : "HỌC TRƯỚC";
+                        sb.append(String.format("- [QUAN HỆ] ĐIỀU KIỆN %s: ", type))
+                            .append(
+                                rule.getSatisfiedByCourses().stream()
+                                    .map(
+                                        rc ->
+                                            String.format("%s (%s)", rc.getTitleVn(), rc.getCode()))
+                                    .collect(Collectors.joining(", ")))
                             .append("\n");
                       }
                     }
@@ -75,22 +95,32 @@ public class ChatServiceImpl implements ChatService {
 
       prompt =
           String.format(
-              "Bạn là trợ lý ảo thông minh của hệ thống UniGraph, chuyên hỗ trợ sinh viên về thông tin đào tạo.\n"
-                  + "Dưới đây là dữ liệu thực tế từ cơ sở dữ liệu:\n\n%s\n\n"
-                  + "CÁCH TRẢ LỜI:\n"
-                  + "1. Hãy trả lời một cách tự nhiên như một người tư vấn thật thụ. Tránh liệt kê khô khan trừ khi cần thiết.\n"
-                  + "2. Luôn ưu tiên thông tin trong dữ liệu trên. Nếu người dùng hỏi về môn A tương đương môn nào, hãy kiểm tra kỹ các mục 'CÁC MÔN TƯƠNG ĐƯƠNG' của tất cả các môn có trong dữ liệu.\n"
-                  + "3. Nếu dữ liệu cho thấy quan hệ giữa các môn (như tương đương, tiên quyết), hãy giải thích rõ mối quan hệ đó cho người dùng.\n"
-                  + "4. Tuyệt đối không bịa đặt thông tin không có trong dữ liệu.\n"
-                  + "5. Nếu không tìm thấy thông tin cụ thể, hãy trả lời một cách khéo léo và gợi ý người dùng cung cấp thêm chi tiết (như mã môn cụ thể).\n\n"
-                  + "Câu hỏi của người dùng: %s",
+              "Bạn là trợ lý ảo UniGraph, chuyên gia tư vấn lộ trình học tập dựa trên dữ liệu đồ"
+                  + " thị môn học chính xác.\n"
+                  + "Dưới đây là DỮ LIỆU THỰC TẾ từ hệ thống về các môn học liên quan đến câu"
+                  + " hỏi:\n\n"
+                  + "%s\n\n"
+                  + "NHIỆM VỤ CỦA BẠN:\n"
+                  + "1. Phân tích câu hỏi của sinh viên và tìm môn học mục tiêu trong DỮ LIỆU THỰC"
+                  + " TẾ.\n"
+                  + "2. Kiểm tra các mục [QUAN HỆ] của môn học mục tiêu đó để tìm câu trả lời (Ví"
+                  + " dụ: Nếu hỏi 'môn gì trước SE356', hãy tìm 'SE356' và xem mục 'ĐIỀU KIỆN TIÊN"
+                  + " QUYẾT').\n"
+                  + "3. Nếu môn học mục tiêu không có quan hệ trực tiếp, hãy kiểm tra các môn TƯƠNG"
+                  + " ĐƯƠNG của nó xem chúng có thông tin không.\n"
+                  + "4. Trả lời một cách tự nhiên, chuyên nghiệp. Giải thích rõ ràng các điều kiện"
+                  + " tiên quyết hoặc môn học trước nếu có.\n"
+                  + "5. TUYỆT ĐỐI KHÔNG BỊA THÔNG TIN. Nếu dữ liệu trên không chứa thông tin cần"
+                  + " thiết cho môn học cụ thể đó, hãy nói rõ là hệ thống chưa cập nhật dữ liệu"
+                  + " quan hệ cho môn này.\n\n"
+                  + "Câu hỏi của sinh viên: %s",
               context, message);
     }
 
     log.info("Sending prompt to LLM: \n{}", prompt);
 
     try {
-      return chatModel.generate(prompt);
+      return chatModel.chat(prompt);
     } catch (Exception e) {
       log.error("Error generating response from LLM", e);
       return "Xin lỗi, dịch vụ tư vấn đang gặp sự cố. Vui lòng thử lại sau.";

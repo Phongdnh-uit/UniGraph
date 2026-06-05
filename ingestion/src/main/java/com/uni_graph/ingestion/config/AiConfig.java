@@ -1,6 +1,6 @@
 package com.uni_graph.ingestion.config;
 
-import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import dev.langchain4j.model.ollama.OllamaEmbeddingModel;
@@ -12,30 +12,39 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AiConfig {
 
-  @Value("${ai.ollama.base-url}")
-  private String ollamaBaseUrl;
+  @Value("${ai.embedding.base-url}")
+  private String embeddingBaseUrl;
 
-  @Value("${ai.ollama.embedding-model}")
+  @Value("${ai.embedding.model}")
   private String embeddingModelName;
 
-  @Value("${ai.ollama.chat-model:qwen2.5:7b}")
+  @Value("${ai.embedding.timeout:60s}")
+  private Duration embeddingTimeout;
+
+  @Value("${ai.chat.base-url}")
+  private String chatBaseUrl;
+
+  @Value("${ai.chat.model}")
   private String chatModelName;
 
+  @Value("${ai.chat.timeout:120s}")
+  private Duration chatTimeout;
+
   @Bean
-  public EmbeddingModel embeddingModel() {
+  EmbeddingModel embeddingModel() {
     return OllamaEmbeddingModel.builder()
-        .baseUrl(ollamaBaseUrl)
+        .baseUrl(embeddingBaseUrl)
         .modelName(embeddingModelName)
-        .timeout(Duration.ofSeconds(60))
+        .timeout(embeddingTimeout)
         .build();
   }
 
   @Bean
-  public ChatLanguageModel chatLanguageModel() {
+  ChatModel chatLanguageModel() {
     return OllamaChatModel.builder()
-        .baseUrl(ollamaBaseUrl)
+        .baseUrl(chatBaseUrl)
         .modelName(chatModelName)
-        .timeout(Duration.ofSeconds(120))
+        .timeout(chatTimeout)
         .build();
   }
 }

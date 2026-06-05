@@ -58,10 +58,12 @@ public class SchemaServiceImpl implements SchemaService {
 
       nodeProperties.forEach(
           (label, props) -> {
+            List<String> filteredProps =
+                props.stream().filter(p -> !p.equals("embedding")).collect(Collectors.toList());
             sb.append("- ")
                 .append(label)
                 .append(" {")
-                .append(String.join(", ", props))
+                .append(String.join(", ", filteredProps))
                 .append("}\n");
           });
     } catch (Exception e) {
