@@ -11,8 +11,8 @@ spring:
       neo4j:
         initialize-schema: true
         database-name: neo4j
-        index-name: custom-index
-        embedding-dimension: 1536
+        index-name: course_embeddings
+        embedding-dimension: 768
         distance-type: cosine
   neo4j:
     uri: bolt://localhost:7687
@@ -21,7 +21,11 @@ spring:
       password: notverysecret
 
 ai:
-  ollama:
-    base-url: http://localhost:11434
-    embedding-model: embeddinggemma:latest
-    chat-model: gemma4:e2b-it-q4_K_M
+  embedding:
+    base-url: ${EMBEDDING_BASE_URL:http://localhost:11434}
+    model: ${EMBEDDING_MODEL:embeddinggemma:latest}
+    timeout: 60s
+  chat:
+    base-url: ${CHAT_BASE_URL:http://localhost:11434}
+    model: ${CHAT_MODEL:gemma4:e2b-it-q4_K_M}
+    timeout: 120s

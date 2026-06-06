@@ -3,7 +3,7 @@ package com.uni_graph.ingestion.service.impl;
 import com.uni_graph.common.domain.Course;
 import com.uni_graph.ingestion.service.EmbeddingService;
 import dev.langchain4j.data.embedding.Embedding;
-import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class LangChainEmbeddingServiceImpl implements EmbeddingService {
 
   private final EmbeddingModel embeddingModel;
-  private final ChatLanguageModel chatLanguageModel;
+  private final ChatModel chatLanguageModel;
 
   @Override
   public List<Double> embedText(String text) {
@@ -80,7 +80,7 @@ public class LangChainEmbeddingServiceImpl implements EmbeddingService {
             summary, String.join(", ", allCourseCodes));
 
     try {
-      String response = chatLanguageModel.generate(prompt);
+      String response = chatLanguageModel.chat(prompt);
       if (response == null || response.trim().equalsIgnoreCase("NONE")) {
         return new ArrayList<>();
       }

@@ -1,11 +1,10 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: prod
   docker:
     compose:
-      file: ./docker/compose.yaml
-      lifecycle-management: start-and-stop
+      enabled: false
 
   neo4j:
     authentication:
@@ -19,7 +18,7 @@ ai:
     model: ${EMBEDDING_MODEL:embeddinggemma:latest}
     timeout: 60s
   chat:
-    base-url: ${CHAT_BASE_URL:http://localhost:11434}
-    model: ${CHAT_MODEL:gemma4:e2b-it-q4_K_M}
-    api-key: ${CHAT_API_KEY:}
+    base-url: ${CHAT_BASE_URL:https://api.groq.com/openai/v1}
+    model: ${CHAT_MODEL:llama3-70b-8192}
+    api-key: ${CHAT_API_KEY:your-api-key}
     timeout: 120s
