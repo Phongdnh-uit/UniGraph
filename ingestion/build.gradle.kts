@@ -12,7 +12,6 @@ dependencies {
     implementation("eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:3.3.0")
     implementation("dev.langchain4j:langchain4j:1.15.1")
     implementation("dev.langchain4j:langchain4j-ollama:1.15.1")
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-data-neo4j-test")
